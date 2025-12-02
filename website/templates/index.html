@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wonder World - Home</title>
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#e8f5e9;color:#2e7d32;overflow-x:hidden;}
+
+nav{
+    width:100%;background:#2e7d32;padding:20px;display:flex;
+    justify-content:space-between;align-items:center;
+    position:sticky;top:0;z-index:100;
+}
+nav h2{color:white;font-size:26px;}
+nav ul{list-style:none;display:flex;gap:20px;}
+nav ul li a{
+    color:white;text-decoration:none;font-weight:500;font-size:16px;
+    transition:0.3s;
+}
+nav ul li a:hover{color:#b9f6ca;}
+
+.hero{
+    height:85vh;
+    background:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee') center/cover no-repeat;
+    display:flex;justify-content:center;align-items:center;text-align:center;
+    position:relative; overflow:hidden;
+}
+.hero h1{
+    font-size:60px;color:white;text-shadow:0 4px 10px rgba(0,0,0,0.5);
+    opacity:0; transform:translateY(40px); animation:slideDown 1.5s ease forwards;
+}
+.hero p{
+    color:white;font-size:20px;margin-top:10px;
+    opacity:0; transform:translateY(40px); animation:slideDown 1.8s ease forwards;
+}
+.btn{
+    margin-top:20px;padding:12px 25px;background:white;color:#2e7d32;
+    border-radius:6px;font-weight:bold;text-decoration:none;display:inline-block;
+    transition:0.4s;opacity:0;transform:translateY(40px);
+    animation:slideDown 2s ease forwards;
+}
+.btn:hover{background:#b9f6ca;transform:scale(1.05);}
+
+@keyframes slideDown{
+    to{opacity:1;transform:translateY(0);}
+}
+.fade-in{
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s ease;
+}
+.fade-in.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.section{padding:50px;}
+.section h2{text-align:center;font-size:32px;margin-bottom:30px;}
+
+.card-container{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:25px;
+}
+.card{
+    width:300px;background:white;border-radius:12px;overflow:hidden;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    transition:0.4s; transform:translateY(40px); opacity:0;
+}
+.card.visible{opacity:1;transform:translateY(0);}
+.card:hover{
+    transform:translateY(-12px) scale(1.02);
+    box-shadow:0 8px 18px rgba(0,0,0,0.2);
+}
+.card img{width:100%;height:200px;object-fit:cover;}
+.card h3{padding:15px;}
+.card p{padding:0 15px 15px;color:#555;}
+
+footer{
+    background:#2e7d32;color:white;text-align:center;padding:20px;margin-top:40px;
+}
+</style>
+
+</head>
+<body>
+
+<nav>
+    <h2>Wonder World</h2>
+    <ul>
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'places' %}">Places</a></li>
+        <li><a href="{% url 'packages' %}">Packages</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <div>
+        <h1>Explore the Beauty of Nature</h1>
+        <p>Discover breathtaking destinations around the world.</p>
+        <a href="{% url 'places' %}" class="btn">Discover Places</a>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="fade-in">Top Destinations</h2>
+    <div class="card-container">
+
+        <div class="card fade-in">
+            <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8a2VyYWxhJTIwYmFja3dhdGVyc3xlbnwwfHwwfHx8MA%3D%3D">
+            <h3>Kerala Backwaters</h3>
+            <p>Serene lakes surrounded by lush green views.</p>
+        </div>
+
+        <div class="card fade-in">
+            <img src="https://plus.unsplash.com/premium_photo-1661935282164-5ee95f5bf490?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWFuYWxpfGVufDB8fDB8fHww">
+            <h3>Manali</h3>
+            <p>Snow covered mountains with scenic beauty.</p>
+        </div>
+
+        <div class="card fade-in">
+            <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z29hJTIwYmVhY2hlc3xlbnwwfHwwfHx8MA%3D%3D">
+            <h3>Goa Beaches</h3>
+            <p>Golden sands and refreshing tropical sunsets.</p>
+        </div>
+
+    </div>
+</section>
+
+<footer>© 2025 Wonder World | Eco-Travel Guide</footer>
+
+<script>
+const items = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+        }
+    })
+});
+items.forEach(i=>observer.observe(i));
+</script>
+
+</body>
+</html>

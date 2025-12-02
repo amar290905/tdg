@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wonder World - Contact</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#e8f5e9;color:#2e7d32;overflow-x:hidden;}
+
+nav{
+    width:100%;background:#2e7d32;padding:20px;
+    display:flex;justify-content:space-between;
+    align-items:center;position:sticky;top:0;z-index:100;
+}
+nav h2{color:white;}
+nav ul{list-style:none;display:flex;gap:20px;}
+nav ul li a{color:white;text-decoration:none;font-weight:500;}
+nav ul li a:hover{color:#b9f6ca;}
+
+.section{padding:50px;text-align:center;}
+.section h2{font-size:32px;margin-bottom:30px;}
+
+.contact-box{
+    width:50%;background:white;margin:auto;padding:30px;
+    border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.15);
+    transition:1s ease;opacity:0;transform:translateY(40px);
+}
+.contact-box.visible{opacity:1;transform:translateY(0);}
+
+input,textarea{
+    width:100%;padding:12px;border:2px solid #2e7d32;
+    border-radius:10px;margin-bottom:15px;font-size:15px;
+}
+button{
+    padding:12px 25px;background:#2e7d32;border:none;
+    color:white;font-size:16px;border-radius:6px;
+    cursor:pointer;transition:0.3s;
+}
+button:hover{background:#1b5e20;transform:scale(1.05);}
+
+footer{
+    background:#2e7d32;color:white;text-align:center;padding:20px;margin-top:40px;
+}
+</style>
+
+</head>
+<body>
+
+<nav>
+    <h2>Wonder World</h2>
+    <ul>
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'places' %}">Places</a></li>
+        <li><a href="{% url 'packages' %}">Packages</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+</nav>
+
+
+<section class="section">
+    <h2 class="fade-in">Contact Us</h2>
+
+    <div class="contact-box fade-in">
+        <form onsubmit="return sendMessage()">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="msg" rows="5" placeholder="Your Message"></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+</section>
+
+<footer>© 2025 Wonder World | Eco-Travel Guide</footer>
+
+<script>
+
+const items = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+});
+items.forEach(i=>observer.observe(i));
+
+
+function sendMessage(){
+    const name = document.getElementById("name").value;
+    alert("Thank you, " + name + "! Your message has been sent.");
+    return false;
+}
+</script>
+
+</body>
+</html>
